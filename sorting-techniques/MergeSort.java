@@ -8,7 +8,9 @@ public class MergeSort {
 		int[] b = new int[args.length]; // Helper array
 		System.out.println("Before Sort : ");
 		printArray(a);
+		System.out.println("--------------------------------SORTING--------------------------------");
 		mergeSort(a, b, 0, a.length-1);
+		System.out.println("---------------------------------SORTED--------------------------------");
 		System.out.println("After Merge Sort : ");
 		printArray(a);
 	}
@@ -23,6 +25,9 @@ public class MergeSort {
 	}
 	
 	private static void merge(int a[], int[] b, int low, int mid, int high){
+		assert isSorted(a, low, mid);
+		assert isSorted(a, mid+1, high);
+		
 		for(int i=0;i<a.length;i++){
 			b[i] = a[i]; // Copy the original array in the helper array
 		}
@@ -47,13 +52,33 @@ public class MergeSort {
 			a[current+i] = b[leftHelper + i];
 		}
 		
+		printArray(a, low, high);
+		assert isSorted(a, low, high);
 	}
 	
 	private static void printArray(int[] a){
-		for(int num : a){
-			System.out.print(num + " ");
+		printArray(a, 0, a.length - 1);
+	}
+	
+	private static void printArray(int[] a, int low, int high){
+		for(int i=low;i<=high;i++){
+			System.out.print(a[i] + " ");
 		}
 		System.out.println("");
+	}
+	
+	
+	private static boolean isSorted(int[] a){
+		return isSorted(a, 0, a.length-1);
+	}
+	
+	private static boolean isSorted(int[] a, int low, int high){
+		for(int i=low+1;i<=high;i++){
+			if(a[i] < a[i-1]){
+				return false; // Return false even if one condition fails
+			}
+		}
+		return true; // Return true otherwise
 	}
 	
 }
