@@ -1,4 +1,4 @@
-public class SelectionSort {
+public class BubbleSort {
 
 	public static void main(String[] args){
 		int[] a = new int[args.length];
@@ -9,23 +9,21 @@ public class SelectionSort {
 		System.out.println("Before Sort : ");
 		printArray(a);
 		System.out.println("--------------------------------SORTING--------------------------------");
-		selectionSort(a);
+		bubbleSort(a);
 		System.out.println("---------------------------------SORTED--------------------------------");
-		System.out.println("After Selection Sort : ");
+		System.out.println("After Bubble Sort : ");
 		printArray(a);
 		assert isSorted(a);
 	}
 	
-	private static void selectionSort(int[] a){
-		for(int i=0;i<a.length-1;i++){
-			int min = i;
-			for(int j=i+1;j<a.length;j++){
-				if(a[j] < a[min]){
-					min = j;
+	private static void bubbleSort(int[] a){
+		for(int i=0;i<a.length;i++){
+			for(int j=0;j<a.length - i - 1;j++){
+				if(a[j] > a[j+1]){
+					swap(a, j, j+1);
+					printArray(a);
 				}
 			}
-			swap(a, i, min);
-			printArray(a);
 		}
 	}
 	
