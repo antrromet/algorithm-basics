@@ -21,7 +21,8 @@ public class BinarySearch {
 		assert isSorted(a) : "Array not sorted and hence Binary Search cannot be performed";
 		
 		System.out.println("--------------------------------SEARCHING--------------------------------");
-		int foundIndex = binarySearch(a, x, 0, n-1);
+		//int foundIndex = binarySearchRecursive(a, x, 0, n-1);
+		int foundIndex = binarySearch(a, x);
 		System.out.println("-----------------------------SEARCH FINISHED-----------------------------");
 		if(foundIndex == -1){
 			System.out.println(x + " not found");
@@ -30,7 +31,25 @@ public class BinarySearch {
 		}
 	}
 	
-	private static int binarySearch(int[] a, int x, int low, int high){
+	private static int binarySearch(int[] a, int x){
+		int low = 0;
+		int high = a.length - 1;
+		while(high >= low){
+			System.out.print("Searching in ");
+			printArray(a, low, high);
+			int mid = (high + low)/2;
+			if(a[mid] == x){
+				return mid;
+			} else if(x > a[mid]){
+				low = mid + 1;
+			} else {
+				high = mid - 1;
+			}
+		}
+		return -1;
+	}
+	
+	private static int binarySearchRecursive(int[] a, int x, int low, int high){
 		System.out.print("Searching in ");
 		printArray(a, low, high);
 		if(high >= low){
@@ -42,7 +61,7 @@ public class BinarySearch {
 			} else {
 				high = mid - 1;
 			}
-			return binarySearch(a, x, low, high);
+			return binarySearchRecursive(a, x, low, high);
 		}
 		return -1;	
 	}
