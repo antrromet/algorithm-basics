@@ -20,6 +20,9 @@ public class MergeSort {
 			int mid = (high + low)/2; // Divide
 			mergeSort(a, b, low, mid); // Conquer
 			mergeSort(a, b, mid+1, high); // Conquer
+			if(a[mid+1] >= a[mid]){ // Optimizing step
+				return;
+			}
 			merge(a, b, low, mid, high); // Combine
 		}
 	}
@@ -60,6 +63,7 @@ public class MergeSort {
 		printArray(a, 0, a.length - 1);
 	}
 	
+	// Print the array from the given range
 	private static void printArray(int[] a, int low, int high){
 		for(int i=low;i<=high;i++){
 			System.out.print(a[i] + " ");
@@ -72,6 +76,7 @@ public class MergeSort {
 		return isSorted(a, 0, a.length-1);
 	}
 	
+	// Check if the array is sorted in the given range
 	private static boolean isSorted(int[] a, int low, int high){
 		for(int i=low+1;i<=high;i++){
 			if(a[i] < a[i-1]){
